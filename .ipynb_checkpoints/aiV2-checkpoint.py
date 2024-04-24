@@ -8,7 +8,7 @@ df_order_items = pd.read_csv('data/olist_order_items_dataset.csv')
 df_orders = pd.read_csv('data/olist_orders_dataset.csv')
 
 # Gerekli veri birleştirmelerini yapın
-orders_order_items = df_orders.merge(df_order_items, on='order_id').head(50000)
+orders_order_items = df_orders.merge(df_order_items, on='order_id')
 
 def get_recommend(user_id):
     products = orders_order_items[orders_order_items['customer_id'] == user_id]['product_id']
@@ -40,8 +40,6 @@ def get_recommendations(user_id, k=5):
     similar_users = user_product_matrix.iloc[indices]
     # Benzer kullanıcıların aldığı ürünleri öneri olarak döndür
     recommended_products = similar_users.sum().sort_values(ascending=False).head(10)
-    recommended_product_ids = recommended_products.index.tolist()
-    print(recommended_product_ids)
+    return recommended_products
 
-    print(recommended_products)
-    return recommended_product_ids
+get_recommend('9ef432eb6251297304e76186b10a928d')
