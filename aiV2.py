@@ -1,14 +1,13 @@
 import pandas as pd
-from sklearn.feature_extraction.text import TfidfVectorizer
-from sklearn.metrics.pairwise import cosine_similarity
 
 # Veri setlerini okuyun
 df_customers = pd.read_csv('data/olist_customers_dataset.csv')
+df_products = pd.read_csv('data/olist_products_dataset.csv')
 df_order_items = pd.read_csv('data/olist_order_items_dataset.csv')
 df_orders = pd.read_csv('data/olist_orders_dataset.csv')
 
 # Gerekli veri birleştirmelerini yapın
-orders_order_items = df_orders.merge(df_order_items, on='order_id').head(50000)
+orders_order_items = df_orders.merge(df_order_items, on='order_id').head(100)
 
 def get_recommend(user_id):
     products = orders_order_items[orders_order_items['customer_id'] == user_id]['product_id']
