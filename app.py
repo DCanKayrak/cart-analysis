@@ -19,7 +19,7 @@ def users():
     return jsonify(aiV2.orders_order_items['customer_id'].unique().tolist())
 
 @app.route('/userv2')
-def usersWith():
+def usersWith1():
     # Get unique user IDs
     users = aiV2.orders_order_items['customer_id'].unique()
     # Create a list to store predictions for each user
@@ -55,6 +55,12 @@ def make_prediction():
     products = aiV2.orders_order_items[aiV2.orders_order_items['customer_id'] == user_id]['product_id'].unique()
     print(products)
     return jsonify(aiV2.get_recommendations(user_id))
+
+
+@app.route('/userv3')
+def usersWith():
+    user_predictions_list = aiV2.get_user_recommendations()
+    return jsonify(user_predictions_list)
 
 if __name__ == '__main__':
     app.run(debug=True)
