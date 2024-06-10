@@ -2,6 +2,8 @@ from flask import Flask, request, jsonify
 import aiV2
 from flask_cors import CORS
 from collections import defaultdict
+import aiV3
+import pandas as pd
 
 app = Flask(__name__)
 CORS(app)
@@ -58,11 +60,41 @@ def make_prediction():
     print(products)
     return jsonify(aiV2.get_recommendations(user_id))
 
-
 @app.route('/userv3')
 def usersWith():
     user_predictions_list = aiV2.get_user_recommendations()
     return jsonify(user_predictions_list)
+
+@app.route('/upload', methods=['POST'])
+def upload_files():
+    if 'customers' in request.files:
+        aiV3.df_customers = pd.read_csv(request.files['customers'])
+    if 'products' in request.files:
+        aiV3.df_products = pd.read_csv(request.files['products'])
+    if 'order_items' in request.files:
+        aiV3.df_order_items = pd.read_csv(request.files['order_items'])
+    if 'orders' in request.files:
+        aiV3.df_orders = pd.read_csv(request.files['orders'])
+
+    aiV3.train_model()
+
+    return jsonify({"message": "Files uploaded and model trained successfully!"})
+@app.route('/predict')
+def make_prediction():
+    user_id = request.args.get('userId', type=str)
+    return jsonify(aiV3.get_recommendations(user_id))
+
+@app.route('/top-products')
+def top_products():
+    top_products = aiV2.df_order_items['product_id'].value_counts().head(10).index.tolist()
+    top_products_names = aiV2.df_products[aiV2.df_products['product_id'].isin(top_products)][
+        'product_category_name'].tolist()
+    return jsonify(top_products_names)
+
+@app.route('/top-users')
+def top_users():
+    top_users = aiV2.df_orders['customer_id'].value_counts().head(10).index.tolist()
+    return jsonify(top_users)
 
 if __name__ == '__main__':
     app.run(debug=True)
