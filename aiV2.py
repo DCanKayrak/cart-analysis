@@ -5,22 +5,22 @@ import random
 
 # Ürün isimleri
 product_names = [
-    'Wireless Mouse', 'Bluetooth Headphones', 'Laptop Stand', 'Portable Charger', 'USB-C Hub', 'Smartwatch', 
-    'Noise Cancelling Headphones', 'Fitness Tracker', 'External Hard Drive', 'LED Desk Lamp', 'Ergonomic Chair', 
-    'Mechanical Keyboard', 'Gaming Mouse', '4K Monitor', 'Smartphone Stand', 'Wireless Earbuds', 'Bluetooth Speaker', 
-    'Smart Home Hub', 'Robot Vacuum', 'Smart Light Bulb', 'Portable Projector', 'Webcam', 'Streaming Microphone', 
-    'Graphics Tablet', 'Smart Thermostat', 'Electric Toothbrush', 'Digital Photo Frame', 'E-Reader', 'Smart Lock', 
-    'Wireless Security Camera', 'Air Purifier', 'Electric Kettle', 'Espresso Machine', 'Blender', 'Slow Cooker', 
-    'Rice Cooker', 'Air Fryer', 'Food Processor', 'Stand Mixer', 'Toaster Oven', 'Electric Griddle', 'Instant Pot', 
-    'Electric Skillet', 'Cordless Drill', 'Tool Set', 'Circular Saw', 'Electric Screwdriver', 'Lawn Mower', 
-    'Leaf Blower', 'Pressure Washer', 'Garden Hose', 'Garden Shears', 'Smart Sprinkler', 'Fitness Bike', 'Treadmill', 
-    'Yoga Mat', 'Dumbbell Set', 'Kettlebell', 'Resistance Bands', 'Foam Roller', 'Weight Bench', 'Jump Rope', 
-    'Pull-Up Bar', 'Running Shoes', 'Hiking Boots', 'Tent', 'Sleeping Bag', 'Camping Stove', 'Backpack', 'Flashlight', 
-    'Binoculars', 'Fishing Rod', 'Cooler', 'Inflatable Kayak', 'Paddle Board', 'Snorkel Set', 'Wet Suit', 'Life Jacket', 
-    'Picnic Blanket', 'Portable Grill', 'Fire Pit', 'Outdoor Speaker', 'Hammock', 'Solar Charger', 'Water Bottle', 
-    'Travel Mug', 'Luggage Set', 'Packing Cubes', 'Travel Pillow', 'Travel Adapter', 'Portable WiFi Hotspot', 
-    'Noise-Cancelling Earplugs', 'Travel Backpack', 'Action Camera', 'Drone', 'Digital Camera', 'Camera Lens', 
-    'Tripod', 'Memory Card', 'Camera Bag', 'Photo Printer'
+    'Mouse sem Fio', 'Fones de Ouvido Bluetooth', 'Suporte para Laptop', 'Carregador Portátil', 'Hub USB-C', 'Relógio Inteligente', 
+    'Fones de Ouvido com Cancelamento de Ruído', 'Rastreador de Atividade', 'Disco Rígido Externo', 'Lâmpada de Mesa LED', 'Cadeira Ergonômica', 
+    'Teclado Mecânico', 'Mouse para Jogos', 'Monitor 4K', 'Suporte para Smartphone', 'Fones de Ouvido sem Fio', 'Alto-falante Bluetooth', 
+    'Hub para Casa Inteligente', 'Aspirador de Pó Robô', 'Lâmpada Inteligente', 'Projetor Portátil', 'Webcam', 'Microfone para Streaming', 
+    'Mesa Digitalizadora', 'Termostato Inteligente', 'Escova de Dentes Elétrica', 'Porta-retratos Digital', 'Leitor de E-books', 'Fechadura Inteligente', 
+    'Câmera de Segurança sem Fio', 'Purificador de Ar', 'Chaleira Elétrica', 'Máquina de Espresso', 'Liquidificador', 'Panela de Cozimento Lento', 
+    'Panela de Arroz', 'Fritadeira sem Óleo', 'Processador de Alimentos', 'Batedeira', 'Forno Elétrico', 'Chapa Elétrica', 'Panela de Pressão Elétrica', 
+    'Frigideira Elétrica', 'Furadeira sem Fio', 'Conjunto de Ferramentas', 'Serra Circular', 'Parafusadeira Elétrica', 'Cortador de Grama', 
+    'Soprador de Folhas', 'Lavadora de Alta Pressão', 'Mangueira de Jardim', 'Tesouras de Jardim', 'Aspersor Inteligente', 'Bicicleta Ergométrica', 'Esteira', 
+    'Tapete de Yoga', 'Conjunto de Halteres', 'Kettlebell', 'Faixas de Resistência', 'Rolo de Espuma', 'Banco de Peso', 'Corda de Pular', 
+    'Barra de Tração', 'Tênis de Corrida', 'Botas de Caminhada', 'Barraca', 'Saco de Dormir', 'Fogareiro de Camping', 'Mochila', 'Lanterna', 
+    'Binóculos', 'Vara de Pesca', 'Cooler', 'Caiaque Inflável', 'Prancha de Stand Up Paddle', 'Kit de Mergulho', 'Roupa de Neoprene', 'Colete Salva-vidas', 
+    'Manta para Piquenique', 'Grelha Portátil', 'Fogueira Portátil', 'Alto-falante Externo', 'Rede', 'Carregador Solar', 'Garrafa de Água', 
+    'Caneca de Viagem', 'Conjunto de Malas', 'Cubos Organizadores', 'Travesseiro de Viagem', 'Adaptador de Viagem', 'Hotspot WiFi Portátil', 
+    'Protetores Auriculares com Cancelamento de Ruído', 'Mochila de Viagem', 'Câmera de Ação', 'Drone', 'Câmera Digital', 'Lente de Câmera', 
+    'Tripé', 'Cartão de Memória', 'Bolsa para Câmera', 'Impressora de Fotos'
 ]
 
 # Veri setlerini okuyun

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Customer-Product Relationships</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sigma.js/1.2.1/sigma.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
+</head>
+<body>
+    <div id="container" style="width: 800px; height: 600px;"></div>
+    <button onclick="loadData()">Load Data</button>
+
+    <script>
+        let customers = [];
+        let orderItems = [];
+        let orders = [];
+        let products = [];
+
+        function processData() {
+            // Verileri birleştirme
+            const mergedData = [];
+
+            orders.forEach(order => {
+                const orderItemsForOrder = orderItems.filter(item => item.order_id === order.order_id);
+                const customer = customers.find(cust => cust.customer_id === order.customer_id);
+
+                orderItemsForOrder.forEach(item => {
+                    const product = products.find(prod => prod.product_id === item.product_id);
+
+                    if (customer && product) {
+                        mergedData.push({
+                            order_id: order.order_id,
+                            customer_id: customer.customer_id,
+                            customer_unique_id: customer.customer_unique_id,
+                            product_id: product.product_id
+                        });
+                    }
+                });
+            });
+
+            // Sigma.js ile grafik oluşturma
+            const s = new sigma({
+                graph: {
+                    nodes: [],
+                    edges: []
+                },
+                container: 'container'
+            });
+
+            // Benzersiz müşteri ve ürün düğümlerini ekleme
+            const customersSet = new Set();
+            const productsSet = new Set();
+
+            mergedData.forEach(entry => {
+                if (!customersSet.has(entry.customer_id)) {
+                    s.graph.addNode({
+                        id: entry.customer_id,
+                        label: `Customer: ${entry.customer_unique_id}`,
+                        x: Math.random(),
+                        y: Math.random(),
+                        size: 1,
+                        color: '#1f77b4'
+                    });
+                    customersSet.add(entry.customer_id);
+                }
+
+                if (!productsSet.has(entry.product_id)) {
+                    s.graph.addNode({
+                        id: entry.product_id,
+                        label: `Product: ${entry.product_id}`,
+                        x: Math.random(),
+                        y: Math.random(),
+                        size: 1,
+                        color: '#ff7f0e'
+                    });
+                    productsSet.add(entry.product_id);
+                }
+
+                s.graph.addEdge({
+                    id: `edge-${entry.order_id}`,
+                    source: entry.customer_id,
+                    target: entry.product_id,
+                    color: '#ccc'
+                });
+            });
+
+            // Grafik çizimi
+            s.refresh();
+        }
+
+        function loadData() {
+            const customersFilePath = '/data/olist_customers_dataset.csv';
+            const orderItemsFilePath = '/data/olist_order_items_dataset.csv';
+            const ordersFilePath = '/data/olist_orders_dataset.csv';
+            const productsFilePath = '/data/olist_products_dataset.csv';
+
+            loadCSV(customersFilePath, function(data) {
+                customers = data;
+                loadCSV(orderItemsFilePath, function(data) {
+                    orderItems = data;
+                    loadCSV(ordersFilePath, function(data) {
+                        orders = data;
+                        loadCSV(productsFilePath, function(data) {
+                            products = data;
+                            processData();
+                        });
+                    });
+                });
+            });
+        }
+
+        function loadCSV(filePath, callback) {
+            fetch(filePath)
+                .then(response => response.text())
+                .then(text => {
+                    Papa.parse(text, {
+                        header: true,
+                        complete: function(results) {
+                            callback(results.data);
+                        }
+                    });
+                });
+        }
+    </script>
+</body>
+</html>
