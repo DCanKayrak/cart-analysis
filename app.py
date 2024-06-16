@@ -79,14 +79,10 @@ def upload_files():
     aiV3.train_model()
 
     return jsonify({"message": "Files uploaded and model trained successfully!"})
-@app.route('/predict')
-def make_prediction():
-    user_id = request.args.get('userId', type=str)
-    return jsonify(aiV3.get_recommendations(user_id))
 
 @app.route('/top-products')
 def top_products():
-    top_products = aiV2.df_order_items['product_id'].value_counts().head(10).index.tolist()
+    top_products = aiV2.df_products['product_id'].value_counts().head(10).index.tolist()
     top_products_names = aiV2.df_products[aiV2.df_products['product_id'].isin(top_products)][
         'product_category_name'].tolist()
     return jsonify(top_products_names)
